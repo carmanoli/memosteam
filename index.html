@@ -45,19 +45,13 @@
         }
         
         function setPosition(position) {
-           latitude = position.coords.latitude;
+            latitude = position.coords.latitude;
             longitude = position.coords.longitude;
-				alert("longitude:"+  longitude);
+	    alert("longitude:"+  longitude);
+	    addaentity(); 	
         }
-    
 
-        
-        // <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: 38.91889940000001; latitude: -9.380815; animation-mixer"/>
-    
-
-    
-	    function load() {
-		getLocation();
+	    function addaentity(){
 		alert("latitude:"+  latitude);
 		var ascene = document.getElementById("ascene");
 		var aentity = document.createElement('a-entity');
@@ -68,7 +62,12 @@
 		aentity.setAttribute('gltf-mode', './assets/magnemite/scene.gltf');
         	ascene.appendChild(aentity);
 		console.log("latitude:"+  latitude);
-
+	    }
+        
+        // <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: 38.91889940000001; latitude: -9.380815; animation-mixer"/>
+    
+	    function load() {
+		getLocation();
 	    }
 
 	    window.onload = load;
