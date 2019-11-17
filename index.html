@@ -31,7 +31,7 @@
     </a-scene>
     
     <script>
-        var ascene = document.getElementById("ascene");
+
         
         var latitude;
         var longitude;
@@ -57,6 +57,8 @@
     
 	    function load() {
 		getLocation();
+		alert("latitude:"+  latitude);
+		var ascene = document.getElementById("ascene");
 		var aentity = document.createElement('a-entity');
 		aentity.setAttribute('gltf-mode', './assets/magnemite/scene.gltf');
 		aentity.setAttribute('rotation', '0 180 0');
