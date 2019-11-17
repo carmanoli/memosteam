@@ -50,19 +50,25 @@
           "<br>Longitude: " + position.coords.longitude;
         }
     
-        getLocation();
-        var aentity = document.createElement('a-entity');
-        aentity.setAttribute('gltf-mode', './assets/magnemite/scene.gltf');
-        aentity.setAttribute('rotation', '0 180 0');
-        aentity.setAttribute('scale', '0.15 0.15 0.15');
-        aentity.setAttribute('gps-entity-place', "latitude:"+  latitude + "; longitude: " + longitude  + "; animation-mixer");
-        aentity.setAttribute('gltf-mode', './assets/magnemite/scene.gltf');
-        
+
         
         // <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: 38.91889940000001; latitude: -9.380815; animation-mixer"/>
     
         ascene.appendChild(aentity);
     
+	    function load() {
+		getLocation();
+		var aentity = document.createElement('a-entity');
+		aentity.setAttribute('gltf-mode', './assets/magnemite/scene.gltf');
+		aentity.setAttribute('rotation', '0 180 0');
+		aentity.setAttribute('scale', '0.15 0.15 0.15');
+		aentity.setAttribute('gps-entity-place', "latitude:"+  latitude + "; longitude: " + longitude  + "; animation-mixer");
+		aentity.setAttribute('gltf-mode', './assets/magnemite/scene.gltf');
+		   console.log("latitude:"+  latitude);
+
+		}
+
+		window.onload = load;
         </script>
 </body>
 </html>
