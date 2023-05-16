@@ -1,82 +1,112 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>GeoAR.js demo</title>
-	
-	
-<script>THREEx.ArToolkitContext.baseURL = 'https://jeromeetienne.github.io/AR.js/three.js/'</script>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MemoSTEAM</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="nav.css" />
 
-	
-	
-    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
-    
-     <script src="https://rawgit.com/chenzlabs/aframe-ar/master/dist/aframe-ar.min.js">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="hexagon-grid.css" />
 
-	     <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script>
-       // THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+      $(function () {
+        var includes = $("[data-include]");
+        $.each(includes, function () {
+          var file = $(this).data("include") + ".html";
+
+          let filename = $(this).data("include") + ".html";
+          let element = "#" + $(this).data("include");
+
+          $.get(filename, function (data) {
+            let image = $(data).find("#article-image");
+            $(element + "-image").replaceWith($(data).find("#article-image"));
+
+            let title = $(data).find("#article-title");
+            $(element + "-title").replaceWith($(data).find("#article-title"));
+          });
+        });
+      });
     </script>
+  </head>
 
-    
-</head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a class="active" href="index.html">
+              <img id="logo" src="image/logo_white.png"
+            /></a>
+          </li>
 
-<body style='margin: 0; overflow: hidden;'>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    
+    <div id="grid">
+      <div data-include="article-steam-robot"></div>
+      <div data-include="article-steam"></div>
+      <div data-include="article-education-heart"></div>
+      <div data-include="article-tangibility"></div>
+      <div data-include="article-breathing-machine"></div>
 
-    <a-scene id="ascene"
-        vr-mode-ui="enabled: false"
-		embedded
-        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+      <ul id="hexGrid">
+        <li class="hex">
+          <div class="hexIn">
+            <a class="hexLink" href="article-steam-robot.html">
+              <div id="article-steam-robot-image"></div>
+              <div class="demo2" id="article-steam-robot-title"></div>
+            </a>
+          </div>
+        </li>
 
-         
-        
-        <a-camera gps-camera rotation-reader></a-camera>
-    </a-scene>
-    
-    <script>
+        <li class="hex">
+          <div class="hexIn">
+            <a class="hexLink" href="article-steam.html">
+              <div id="article-steam-image"></div>
+              <div class="demo2" id="article-steam-title"></div>
+            </a>
+          </div>
+        </li>
 
-        
-        var latitude;
-        var longitude;
-        function getLocation() {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(setPosition);
- 
-          } else { 
-            x.innerHTML = "Geolocation is not supported by this browser.";
-          }
-        }
-        
-        function setPosition(position) {
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-	    alert("longitude:"+  longitude);
-	    addaentity(); 	
-        }
+        <li class="hex">
+          <div class="hexIn">
+            <a class="hexLink" href="article-education-heart.html">
+              <div id="article-education-heart-image"></div>
+              <div class="demo2" id="article-education-heart-title"></div>
+            </a>
+          </div>
+        </li>
 
-	    function addaentity(){
-		alert("latitude:"+  latitude);
-		var ascene = document.getElementById("ascene");
-		var aentity = document.createElement('a-entity');
-		aentity.setAttribute('gltf-mode', './assets/magnemite/scene.gltf');
-		aentity.setAttribute('rotation', '0 180 0');
-		aentity.setAttribute('scale', '0.15 0.15 0.15');
-		aentity.setAttribute('gps-entity-place', "latitude:"+  latitude + "; longitude: " + longitude  + "; animation-mixer");
-		aentity.setAttribute('gltf-mode', './assets/magnemite/scene.gltf');
-        	ascene.appendChild(aentity);
-		console.log("latitude:"+  latitude);
-	    }
-        
-//<a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: -9.380815; latitude: 38.91889940000001; animation-mixer"/>        
-    
-	    function load() {
-		getLocation();
-	    }
+        <li class="hex">
+          <div class="hexIn">
+            <a class="hexLink" href="article-tangibility.html">
+              <div id="article-tangibility-image"></div>
+              <div class="demo2" id="article-tangibility-title"></div>
+            </a>
+          </div>
+        </li>
 
-	    window.onload = load;
-        </script>
-</body>
+        <li class="hex">
+          <div class="hexIn">
+            <a class="hexLink" href="article-breathing-machine.html">
+              <div id="article-breathing-machine-image"></div>
+              <div class="demo2" id="article-breathing-machine-title"></div>
+            </a>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <footer>
+      <div class="cell">MemoSTEAM @2023</div>
+    </footer>
+
+  </body>
 </html>
