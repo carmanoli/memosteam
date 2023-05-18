@@ -103,6 +103,8 @@ td {
   overflow-x: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  vertical-align:top;
 }
 
 th {
