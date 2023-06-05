@@ -1,0 +1,126 @@
+Eu já tinha feito um projeto em que editava ficheiros e consegiia visualizar uma apresentação desses ficheiros.
+
+Não sei onde está.
+
+Bem é uma forma de exercitar.
+O objetivo é ter um ficheiro jSON e em função disso criar um formulário e ir preenchendo.
+
+Use cases:
+- gestão de lista de compras
+
+As vantagens:
+Não ter que ter uma base de dados, logo ser serverless.
+
+Por um lado queria algo que não tivesse restrições, que pudesse criar um registo mas que não tivesse restrições quanto ao formato.
+
+Por outro tem que ser algo com regras.
+
+Vou começar por ter um formulário.
+
+E vou adicionando registo ao um outro json
+
+Este tutorial explica algumas funcionalidades de criação e manuseamento de ficheiros
+https://www.youtube.com/watch?v=8EcBJV0sOSU
+
+How to Model Data: A Guide To JSON Data Modeling
+https://www.couchbase.com/blog/a-json-data-modeling-guide/
+
+DynDns
+https://www.makeuseof.com/tag/5-best-dynamic-dns-providers-can-lookup-free-today/
+N-Ip
+
+Using the File API on Upload Forms - JavaScript Tutorial
+https://www.youtube.com/watch?v=lbb4FS_mjU0
+
+Read a file using the FileReader API – JavaScript Tutorial
+https://www.youtube.com/watch?v=u2VTtAXq1iA
+
+## Regras da aplicação
+- Existe um ficheiro memosteam.json que terá algumas das tabelas principais
+- Existe um ficheiro <folder-name>.json que terá informação editável
+
+
+## Bibliotecas e funções usadas
+File System Access
+https://developer.mozilla.org/en-US/docs/Web/API/window/showDirectoryPicker
+https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle
+
+showDirectoryPicker
+
+Mais um tutorial
+https://fjolt.com/article/javascript-new-file-system-api
+
+
+Este tutorial explica como escrever para um ficheiro
+https://css-tricks.com/getting-started-with-the-file-system-access-api/
+
+
+Este tuorial inclui recursion, history of directories
+https://blog.kowalczyk.info/article/mzht/implementing-wc-in-a-browser.html
+
+
+Store handle in indexdb
+https://stackoverflow.com/questions/69890634/is-there-a-way-to-programmatically-set-the-default-directory-with-file-system-ac
+
+
+## Use Cases
+- Ter um controlo sobre eventos dos mics, por exemplo, o mic portátil onde está.
+
+- às vezes quero tomar notas e não tenho uma ferramenta para sistematizar
+Parece-me que seria algo parecido com o Obsedian
+
+
+## Save file
+Saving Files with the OneDrive File Picker JavaScript SDK v7.2
+https://learn.microsoft.com/en-us/onedrive/developer/controls/file-pickers/js-v72/save-file?view=odsp-graph-online
+
+
+## Misc
+
+
+
+
+Bootstrap Multiple Select Two Side
+https://stackoverflow.com/questions/15654506/bootstrap-multiple-select-two-side
+Move options between two multi-select fields
+https://stackoverflow.com/questions/12232962/move-options-between-two-multi-select-fields
+
+
+https://github.com/iotshaman/json-repo
+
+
+Algumas referências:
+https://github.com/josdejong/jsoneditor
+
+https://jsoneditoronline.org/
+
+https://github.com/json-editor/json-editor
+
+Let’s build a web app which transcribes and translates audio using OpenAI’s Whisper Model
+https://towardsdatascience.com/build-a-speech-to-text-web-app-using-node-js-210f8c054d79
+
+Talking with AI using OpenAI’s Whisper, GPT-3, and ElevenLabs
+https://betterprogramming.pub/talking-with-ai-using-whisper-gpt-3-and-speech-synthesis-2b86ce7c5c59
+
+text to speech
+https://code-boxx.com/javascript-text-to-speech/
+
+
+https://bestofjs.org/projects/json-editor
+
+WebComponent
+https://www.webcomponents.org/element/xtal-json-editor
+
+
+https://web.dev/patterns/files/open-a-directory/
+
+
+https://css-tricks.com/getting-started-with-the-file-system-access-api/
+
+Nota:
+The File object returned by FileSystemFileHandle.getFile() is only readable as long as the underlying file on disk hasn't changed. If the file on disk is modified, the File object becomes unreadable and you'll need to call getFile() again to get a new File object to read the changed data.
+https://developer.chrome.com/articles/file-system-access/
+
+How LEGO® Education uses the Web Bluetooth and the Web Serial APIs
+https://developer.chrome.com/blog/lego-education-spike-web-bluetooth-web-serial/
+

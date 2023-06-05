@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+
+
+</head>
+
+<body>
+  <div>
+    <button class="selectDirectory">ler</button>
+  </div>
+
+  <form class="p-3 border border-3 rounded m-3">
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+</body>
+
+<script>
+
+  let directoryName = "";
+  let directoryHandle;
+  let dataFileHandle; // a pointer to a JSON file (that may or may not exist) with same nae as the directory
+  let dataFileJson;
+
+  document.querySelector(".selectDirectory").onclick = async () => {
+    directoryHandle = await window.showDirectoryPicker();
+    await directoryHandle.requestPermission({ writable: true })
+
+
+
+
+
+    directoryName = directoryHandle.name;
+    
+    // console.log("directoryName: " + directoryName); 
+    var moment = new Date().toISOString();
+
+    await getDataFileHandle(dataFileHandle);
+    console.log("dataFileHandle: ", dataFileHandle);
+    console.log("dataFileJson 1 ", dataFileJson);
+
+    let Human = { 
+    moment: moment,
+    Name: "John",
+    age: 20,
+    };
+
+    dataFileJson.push(Human);
+
+    console.log("dataFileJson 2 ", dataFileJson);
+    await updateDataFile();
+
+
+    for await (const entry of directoryHandle.values()) {
+      console.log(entry.kind, entry.name);
+      if (entry.kind === "file") {
+        if (entry.name.toLowerCase() == "memosteam.json") {
+          const file = await entry.getFile();
+          // out[file.name] = file;
+          // console.log(await file.text());
+          let jsonString = await file.text();
+          let jsonObject = JSON.parse(jsonString);
+
+          console.log(jsonObject.count);
+
+          var par = document.createElement("p");
+          var text = document.createTextNode(jsonString);
+          par.appendChild(text);
+          document.body.appendChild(par);
+
+          var par = document.createElement("p");
+          var text = document.createTextNode("jsonObject:");
+          par.appendChild(text);
+          document.body.appendChild(par);
+
+          var par = document.createElement("p");
+          var text = document.createTextNode(jsonObject.count);
+          par.appendChild(text);
+          document.body.appendChild(par);
+
+          for (var key in jsonObject) {
+            if (jsonObject.hasOwnProperty(key)) {
+              // console.log(key + " -> " + jsonObject[key]);
+
+              // https://stackoverflow.com/questions/47436236/how-to-check-if-it-is-a-jsonarray-or-jsonobject-in-javascript
+
+              if (Array.isArray(jsonObject[key])) {
+                console.log("It is an array!");
+                addSelectList(jsonObject[key], key)
+
+              } else {
+                console.log("It is not an array!");
+                console.log(jsonObject[key]);
+
+                for (var childKey in jsonObject[key]) {
+                  if (jsonObject[key].hasOwnProperty(childKey)) {
+
+                    console.log(childKey + " -> " + jsonObject[key][childKey]);
+                  }
+                }
+              }
+
+                /*
+                            for (var i = 0; i < jsonObject[key].length; i++) {
+                              var counter = jsonObject[key][i];
+                              console.log(counter);
+                            }
+                
+                
+                
+                            var par = document.createElement("p");
+                            var text = document.createTextNode(jsonObject[key]);
+                            par.appendChild(text);
+                            document.body.appendChild(par);
+                */
+                /*
+                              par.appendChild(key + " -> " + jsonObject[key]);
+                              document.body.appendChild(par);
+                */
+              }
+            }
+          }
+        }
+      }
+    };
+
+</script>
+
+
+
+<script>
+
+    let uuid = self.crypto.randomUUID();
+    console.log(uuid);
+    /*
+    
+      var form = document.querySelector("form")
+      // New selection
+      //Create array of options to be added
+      var array = ["Volvo", "Saab", "Mercades", "Audi"];
+    
+      //Create and append select list
+      var selectList = document.createElement("select");
+      selectList.id = "mySelect";
+    
+    
+      //Create and append the options
+      for (var i = 0; i < array.length; i++) {
+        var option = document.createElement("option");
+        option.value = array[i];
+        option.text = array[i];
+        selectList.appendChild(option);
+      }
+    
+      form.appendChild(selectList);
+    */
+
+    /*
+      Add a select list to an existing form element
+    */
+    function addSelectList(listArray, listId) {
+      var form = document.querySelector("form")
+
+      // DIV container
+      var formItem = document.createElement("div");
+      formItem.className = "mb-3";
+      form.appendChild(formItem);
+
+      // Label
+      var formItemLabel = document.createElement("label");
+      formItemLabel.innerHTML = capitalizeFirstLetter(listId);
+      formItemLabel.htmlFor = listId;
+      formItemLabel.className = "form-label";
+      formItem.appendChild(formItemLabel);
+
+      var selectList = document.createElement("select");
+      selectList.id = listId;
+      selectList.className = "form-select";
+      console.log("listArray.length: " + listArray.length)
+      for (var i = 0; i < listArray.length; i++) {
+        var option = document.createElement("option");
+        option.value = listArray[i];
+        option.text = listArray[i];
+        selectList.appendChild(option);
+      }
+      formItem.appendChild(selectList);
+
+      function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+
+    }
+
+
+    async function getDataFileHandle() {
+
+      for await (const entry of directoryHandle.values()) {
+
+      if (entry.kind === "file") {
+
+        if (entry.name.toLowerCase() == directoryName.toLowerCase() + ".json") {
+          console.log("entry.name.toLowerCase(): ", entry.name.toLowerCase());
+          console.log("directoryName: ", directoryName + ".json");
+
+          dataFileHandle = await entry.getFile();
+          //console.log("dataFileHandle: ", dataFileHandle);
+
+          console.log(await dataFileHandle.text());
+          let jsonString = await dataFileHandle.text();
+          dataFileJson = JSON.parse(jsonString);
+
+
+          return dataFileHandle;
+        }
+      }
+
+    }
+
+
+      console.log("fileExists: ", fileExists);
+
+      console.log("Create file dataFileHandle: ");
+
+          // ficheiro não existe criar
+          dataFileHandle = await directoryHandle.getFileHandle(directoryName + '.json', { create: true })
+      
+      let jsonString =  '[]';
+      dataFileJson = JSON.parse(jsonString);
+            const writable = await dataFileHandle.createWritable()
+            await writable.write(jsonString)  // empty jason array
+            await writable.close()
+
+            return dataFileHandle;
+    }
+
+    async function updateDataFile() {
+      console.log("dataFileJson", dataFileJson);
+      console.log("updateDataFile dataFileHandle: ", dataFileHandle);
+
+      let jsonString = JSON.stringify(dataFileJson);
+      const writable = await dataFileHandle.createWritable()
+            await writable.write(jsonString)  // empty jason array
+            await writable.close()
+    }
+
+
+
+    var moment = new Date().toISOString();
+    console.log(moment)
+    let today = moment.slice(0, 10)
+    console.log(today)
+    let now = moment.slice(11, 23)
+    console.log(now)
+
+    // let now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second:"2-digit" })     + " " + date.getMilliseconds();
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+// https://www.w3resource.com/javascript-exercises/javascript-math-exercise-23.php
+//https://blog.openapihub.com/en-us/
+</script>
+
+</html>

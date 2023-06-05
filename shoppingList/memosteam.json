@@ -1,0 +1,11 @@
+{
+  "supermecados": ["Aldi", "Continente", "Lidl", "Pingo Doce" ],
+  "description": "Testing JSON",
+  "products": ["Sumo Laranja", "Pão", "Fruta/Legumes (Sumo)", "Algodão"],
+  "form-input": {
+    "name": "products",
+    "type": "multiselect",
+    "products": ["Sumo Laranja", "Pão", "Fruta/Legumes (Sumo)", "Algodão"]
+  }
+
+}
